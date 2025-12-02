@@ -7,11 +7,13 @@ object Day2 {
 
     fun main() {
         val input = reader.actual().readText()
-        part1(input)
-        part2(input)
+//        val input = reader.samples().first().readText()
+        p1(input)
+        p2(input)
+        p2v2(input)
     }
 
-    fun part1(input: String) {
+    private fun p1(input: String) {
         var total = 0L
         input.split(',').forEach { range ->
             val (start, end) = range.split('-').map { it.toLong() }
@@ -27,7 +29,7 @@ object Day2 {
         println("part 1: $total")
     }
 
-    fun part2(input: String) {
+    private fun p2(input: String) {
         val codes = mutableSetOf<Long>()
         input.split(',').forEach { range ->
             val (start, end) = range.split('-').map { it.toLong() }
@@ -48,6 +50,20 @@ object Day2 {
                         }
                     }
                     if (allMatch) codes.add(intCode)
+                }
+            }
+        }
+        println("part 2: ${codes.sum()}")
+    }
+
+    private fun p2v2(input: String) {
+        val codes = mutableSetOf<Long>()
+        input.split(',').forEach { range ->
+            val (start, end) = range.split('-').map { it.toLong() }
+            (start .. end).forEach { intCode ->
+                val code = intCode.toString()
+                (1 .. code.length/2).forEach { groupLength ->
+                    if (code.chunked(groupLength).toSet().size == 1) codes.add(intCode)
                 }
             }
         }
