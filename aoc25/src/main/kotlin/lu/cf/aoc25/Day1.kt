@@ -1,7 +1,6 @@
 package lu.cf.aoc25
 
 import lu.cf.aoc25.domain.Reader
-import lu.cf.aoc25.domain.println
 
 
 object Day1 {
@@ -9,7 +8,7 @@ object Day1 {
 
     fun main() {
         // val lines = reader.samples().first()
-        val lines = reader.actual()
+        val lines = reader.actual().readLines()
 
         var total = 50
         var zeroCount = 0
@@ -36,9 +35,7 @@ object Day1 {
             if (total == 0 && rot=='L') zeroCount2++
             if (total == 0) zeroCount++
         }
-
-        // println("total: $total")
-        println("zeroCount2: $zeroCount2")
-        println("zeroCount: $zeroCount")
+        println("part 1: $zeroCount")
+        println("part 2: $zeroCount2")
     }
 }

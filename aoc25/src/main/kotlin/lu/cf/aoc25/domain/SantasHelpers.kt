@@ -1,4 +1,7 @@
 package lu.cf.aoc25.domain
 
 
-inline fun <T> T.println() = println(this)
+fun <T> T.println(): T {
+    println(this)
+    return this
+}
