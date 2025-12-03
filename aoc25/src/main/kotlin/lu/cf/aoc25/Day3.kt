@@ -7,8 +7,9 @@ object Day3 {
     val reader = Reader(3)
 
     fun main() {
-        val input = reader.actual().readLines()
-//        val input = reader.samples().first().readLines()
+        // val input = reader.actual().readLines()
+        val input = reader.samples().first().readLines()
+        solve(input, 1)
         solve(input, 2)
     }
 
@@ -30,6 +31,6 @@ object Day3 {
                 }
             }
             digitMap.map { (_, v) -> v.first }.joinToString("").toLong()
-        }.println()
+        }.also { println("part $part: $it") }
     }
 }
