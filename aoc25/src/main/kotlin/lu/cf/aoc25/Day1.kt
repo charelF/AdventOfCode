@@ -2,7 +2,6 @@ package lu.cf.aoc25
 
 import lu.cf.aoc25.domain.Reader
 
-
 object Day1 {
     val reader = Reader(1)
 
@@ -18,7 +17,7 @@ object Day1 {
             val rot = line.first()
             val num = line.drop(1).toInt()
             // some ugly error is when start at 0, then we dont cross 0 again to go negative bs
-            if (total == 0 && rot=='L') zeroCount2--
+            if (total == 0 && rot == 'L') zeroCount2--
             when (rot) {
                 'L' -> total -= num
                 'R' -> total += num
@@ -32,7 +31,7 @@ object Day1 {
                 zeroCount2++
             }
             // same ugly error as above
-            if (total == 0 && rot=='L') zeroCount2++
+            if (total == 0 && rot == 'L') zeroCount2++
             if (total == 0) zeroCount++
         }
         println("part 1: $zeroCount")

@@ -1,6 +1,5 @@
 package lu.cf.aoc25.domain
 
-
 import java.io.BufferedReader
 import java.io.FileNotFoundException
 

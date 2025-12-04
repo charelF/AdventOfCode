@@ -13,7 +13,10 @@ object Day3 {
         solve(input, 2)
     }
 
-    private fun solve(input: List<String>, part: Int) {
+    private fun solve(
+        input: List<String>,
+        part: Int,
+    ) {
         val digits = if (part == 1) 2 else 12
 
         input.sumOf { line ->

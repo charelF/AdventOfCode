@@ -17,7 +17,7 @@ object Day2 {
         var total = 0L
         input.split(',').forEach { range ->
             val (start, end) = range.split('-').map { it.toLong() }
-            (start .. end).forEach { intCode ->
+            (start..end).forEach { intCode ->
                 val code = intCode.toString()
                 if (code.length % 2 == 0) {
                     val fh = code.take(code.length / 2)
@@ -33,12 +33,12 @@ object Day2 {
         val codes = mutableSetOf<Long>()
         input.split(',').forEach { range ->
             val (start, end) = range.split('-').map { it.toLong() }
-            (start .. end).forEach { intCode ->
+            (start..end).forEach { intCode ->
                 val code = intCode.toString()
-                for (groupLength in (1 .. code.length/2).reversed()) {
+                for (groupLength in (1..code.length / 2).reversed()) {
                     val candidate = code.take(groupLength)
                     var allMatch = true
-                    for (startIndex in groupLength ..< code.length step groupLength) {
+                    for (startIndex in groupLength..<code.length step groupLength) {
                         val endIndex = startIndex + groupLength
                         if (endIndex > code.length) {
                             allMatch = false
@@ -56,21 +56,22 @@ object Day2 {
         println("part 2: ${codes.sum()}")
     }
 
-    private fun p2v2(input: String) = input
-        .split(',')
-        .map { range ->
-            range.split('-').map { it.toLong() }.let { (start, end) -> (start..end).asSequence() }
-        }
-        .flatMap { seq ->
-            seq.filter { element ->
-                element.toString().let { code ->
-                    (1..code.length / 2).any { groupLength ->
-                        (code.chunked(groupLength).toSet().size == 1)
+    private fun p2v2(input: String) =
+        input
+            .split(',')
+            .map { range ->
+                range.split('-').map { it.toLong() }.let { (start, end) -> (start..end).asSequence() }
+            }
+            .flatMap { seq ->
+                seq.filter { element ->
+                    element.toString().let { code ->
+                        (1..code.length / 2).any { groupLength ->
+                            (code.chunked(groupLength).toSet().size == 1)
+                        }
                     }
                 }
             }
-        }
-        .distinct()
-        .sum()
-        .also { println("part 2: $it") }
+            .distinct()
+            .sum()
+            .also { println("part 2: $it") }
 }
