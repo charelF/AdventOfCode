@@ -8,14 +8,18 @@ object Day4 {
     val reader = Reader(4)
 
     fun main() {
-//        val grid = reader.samples().first().readLines()
+        val lines = reader.samples().first().readLines()
+        val lines = reader.actual().readLines()
+        solve(lines)
+    }
+
+    fun solve(lines: List<String>) {
         val grid =
-            reader.actual().readLines()
-                .flatMapIndexed { i, line ->
-                    line.mapIndexed { j, char ->
-                        (i to j) to char
-                    }
+            lines.flatMapIndexed { i, line ->
+                line.mapIndexed { j, char ->
+                    (i to j) to char
                 }
+            }
                 .associate { (k, v) -> k to v }
                 .toMutableMap()
 
@@ -41,12 +45,12 @@ object Day4 {
                         0
                     }
                 }.map { (k, v) ->
-                    if (v == 1) {
-                        grid[k.first to k.second] = 'x'
+                    v.also {
+                        if (v == 1) {
+                            grid[k.first to k.second] = 'x'
+                        }
                     }
-                    v
-                }
-                    .sum()
+                }.sum()
         }
         println(total)
     }
