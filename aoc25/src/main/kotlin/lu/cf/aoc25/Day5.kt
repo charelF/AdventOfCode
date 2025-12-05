@@ -8,8 +8,9 @@ object Day5 {
     val reader = Reader(5)
 
     fun main() {
-         val input = reader.actual().readText()
+        val input = reader.actual().readText()
 //        val input = reader.samples().first().readText()
+//        val input = reader.samples()[2].readText()
         solve(input, 1)
 //        solve(input, 2)
     }
@@ -20,35 +21,29 @@ object Day5 {
     ) {
         val (ranges, ids) = input.split("\n\n")
 
-        val bounds = ranges.split("\n").map { range ->
-            range.split('-').map { it.toLong() }
-        }.toMutableList()
+        val bounds =
+            ranges.split("\n").map { range ->
+                range.split('-').map { it.toLong() }
+            }.toMutableList()
 
         // part 1
         ids.split("\n").map { it.toLong() }.sumOf { id ->
-            bounds.any { (start, end) -> id in start..<end }.toInt()
+            bounds.any { (start, end) -> id in start..end }.toInt()
         }.println()
-
 
         println(bounds)
 
-
         val combinedBounds: MutableList<List<Long>> = mutableListOf()
         while (bounds.isNotEmpty()) {
-            println(bounds)
-            var (minStart, minEnd)= bounds.minBy { it.first() }.also { bounds.remove(it) }
+            var (minStart, minEnd) = bounds.minBy { it.first() }.also { bounds.remove(it) }
             var prevMinEnd = -1L
-            println("--- before while: minStart $minStart, minEnd: $minEnd, bounds: $bounds")
             while (prevMinEnd != minEnd) {
                 prevMinEnd = minEnd
                 bounds.filter { (start, end) -> start <= (minEnd + 1) }
                     .also { bounds.removeAll(it) }
-                    .also { println("x: $it") }
                     .maxByOrNull { bound -> bound.last() }
-                    .also { if (it != null) minEnd = it.last() }
-                println("---- end of while: minStart $minStart, minEnd: $minEnd, bounds: $bounds")
+                    .also { if (it != null) minEnd = maxOf(minEnd, it.last()) }
             }
-            println("----- after while: minStart $minStart, minEnd: $minEnd, bounds: $bounds")
             combinedBounds.add(listOf(minStart, minEnd))
         }
 
@@ -57,7 +52,6 @@ object Day5 {
         combinedBounds.sumOf { (start, end) -> (end + 1) - start }.println()
 
         // 327779637831920 too low
-
 
 //
 //        var counter = 0L
@@ -69,9 +63,5 @@ object Day5 {
 //            if (bounds.any { (start, end) -> i in start..<end }) counter++
 //        }
 //        println("counter: $counter")
-
-
-
-
     }
 }

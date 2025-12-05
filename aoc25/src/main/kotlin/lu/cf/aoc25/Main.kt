@@ -2,8 +2,8 @@ package lu.cf.aoc25
 
 fun main() {
 //    Day1.main()
-    Day2.main()
+//    Day2.main()
 //    Day3.main()
-    Day4.main()
+//    Day4.main()
     Day5.main()
 }
