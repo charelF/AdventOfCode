@@ -7,16 +7,23 @@ object Day6 {
     val reader = Reader(6)
 
     fun main() {
-        val input = reader.actual().readText()
-//        val input = reader.samples().first().readText()
+//        val input = reader.actual().readLines()
+        val input = reader.samples().first().readLines()
+        println(input)
         p1(input)
+        p2(input)
     }
 
-    private fun p1(input: String) {
-        val grid = input.split("\n").map { line ->
+    private fun p2(input: List<String>) {
+
+        val rot: List<List<Char>>
+        for (i in 0..<input[0].size) {
+    }
+
+    private fun p1(input: List<String>) {
+        val grid = input.map { line ->
             line.trim().split(" +".toPattern()).println()
         }
-
         var total = 0L
         var mul = true
         for (i in 0..<grid[0].size) {
@@ -44,15 +51,5 @@ object Day6 {
             total += acc
         }
         println(total)
-
-
-
-
-        grid.forEachIndexed { i, line ->
-            line.forEachIndexed {j, char ->
-
-            }
-        }
-
     }
 }
