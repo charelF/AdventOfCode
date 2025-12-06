@@ -12,33 +12,38 @@ object Day6 {
         p1(input)
         p2(input)
     }
+//
+//    part 1: 5784380717354
+//    part 2: 7996218225744
 
     private fun p2(input: List<String>) {
-        val grid = input.map { line ->
-            line.map { it }
-        }
+        val grid = input.map { line -> line.map { it } }
         val operators = input.last().trim().split(" +".toPattern()).reversed()
 
-        val rot = Array(size=grid.first().size) { CharArray(size=grid.size-1) }
-        for (i in (0..<input.first().length).reversed()) {
-            for (j in (0..<input.size-1)) {
-                rot[input.first().length - 1 - i][j] = grid[j][i]
+        val height = grid.size - 1 // subtract last row of operators
+        val length = grid.first().size
+        val rotated = Array(length) { CharArray(height) }
+        for (i in 0..<length) {
+            for (j in (0..<height)) {
+                rotated[i][j] = grid[j][length - 1 - i]
             }
         }
+        
+//        println(rotated.toList().map { it.toList().println() })
+
         val accList = mutableListOf<MutableList<Long>>()
         var acc = mutableListOf<Long>()
-        rot.toList().map { charArray ->
-            val string =  charArray.concatToString().trim()
+        rotated.toList().map { charArray ->
+            val string = charArray.concatToString().trim()
             if (string == "") {
                 accList.add(acc)
-                acc = mutableListOf<Long>()
-            }
-            else {
+                acc = mutableListOf()
+            } else {
                 acc.add(string.toLong())
             }
         }
         accList.add(acc)
-        
+
         accList.mapIndexed { i, sublist ->
             when (operators[i]) {
                 "+" -> sublist.fold(0L) { acc, v -> acc + v }
@@ -49,9 +54,10 @@ object Day6 {
     }
 
     private fun p1(input: List<String>) {
-        val grid = input.map { line ->
-            line.trim().split(" +".toPattern())
-        }
+        val grid =
+            input.map { line ->
+                line.trim().split(" +".toPattern())
+            }
         var total = 0L
         var mul = true
         for (i in 0..<grid[0].size) {
@@ -68,11 +74,12 @@ object Day6 {
                         acc = 0L
                     }
                     else -> {
-                        acc = if (mul) {
-                            acc * x.toLong()
-                        } else {
-                            acc + x.toLong()
-                        }
+                        acc =
+                            if (mul) {
+                                acc * x.toLong()
+                            } else {
+                                acc + x.toLong()
+                            }
                     }
                 }
             }
