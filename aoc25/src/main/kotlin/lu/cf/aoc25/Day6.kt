@@ -9,7 +9,6 @@ object Day6 {
     fun main() {
         val input = reader.actual().readLines()
 //        val input = reader.samples().first().readLines()
-        println(input)
         p1(input)
         p2(input)
     }
@@ -26,12 +25,9 @@ object Day6 {
                 rot[input.first().length - 1 - i][j] = grid[j][i]
             }
         }
-        println("---")
-        println("rotlist: ${rot.toList().map { it.toList() }}")
         val accList = mutableListOf<MutableList<Long>>()
         var acc = mutableListOf<Long>()
         rot.toList().map { charArray ->
-            
             val string =  charArray.concatToString().trim()
             if (string == "") {
                 accList.add(acc)
@@ -42,20 +38,19 @@ object Day6 {
             }
         }
         accList.add(acc)
-        println(accList)
         
         accList.mapIndexed { i, sublist ->
             when (operators[i]) {
                 "+" -> sublist.fold(0L) { acc, v -> acc + v }
                 "*" -> sublist.fold(1L) { acc, v -> acc * v }
                 else -> 0
-            }.also { println(it) }
-        }.sum().println()
+            }
+        }.sum().also { println("part 2: $it") }
     }
 
     private fun p1(input: List<String>) {
         val grid = input.map { line ->
-            line.trim().split(" +".toPattern()).println()
+            line.trim().split(" +".toPattern())
         }
         var total = 0L
         var mul = true
@@ -83,6 +78,6 @@ object Day6 {
             }
             total += acc
         }
-        println(total)
+        println("part 1: $total")
     }
 }
