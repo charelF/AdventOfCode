@@ -12,9 +12,6 @@ object Day6 {
         p1(input)
         p2(input)
     }
-//
-//    part 1: 5784380717354
-//    part 2: 7996218225744
 
     private fun p2(input: List<String>) {
         val grid = input.map { line -> line.map { it } }

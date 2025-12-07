@@ -5,6 +5,14 @@ fun <T> T.println(): T {
     return this
 }
 
+fun Array<CharArray>.println(): Array<CharArray> {
+    this.map { row ->
+        row.map { print(it) }
+        println("")
+    }
+    return this
+}
+
 fun Boolean.toInt(): Int {
     return if (this) 1 else 0
 }

@@ -20,4 +20,10 @@ class Reader(day: Int) {
     fun actual(): BufferedReader {
         return read(dayString) ?: throw FileNotFoundException(dayString)
     }
+
+    companion object {
+        fun BufferedReader.toCharArray(): Array<CharArray> {
+            return this.readLines().map { it.toCharArray() }.toTypedArray()
+        }
+    }
 }
