@@ -8,10 +8,9 @@ object Day7 {
     val reader = Reader(7)
 
     fun main() {
-         val input = reader.actual().readLines()
-//        val input = reader.samples().first().readLines()
+//         val input = reader.actual().readLines()
+        val input = reader.samples().first().readLines()
         p1(input)
-        // solve(input, 2)
     }
 
     private fun p1(input: List<String>) {
@@ -19,7 +18,7 @@ object Day7 {
         var splits = 0
         for (i in 1 ..< lines.size) {
             val a = i-1
-            for (j in 1 ..< lines.first().size) {
+            for (j in 0 ..< lines.first().size) {
                 when {
                     lines[a][j] == 'S' -> lines[i][j] = '|'
                     lines[i][j] == '^' && lines[a][j] == '|' -> {
@@ -28,10 +27,10 @@ object Day7 {
                     }
                     lines[a][j] == '|' -> lines[i][j] = '|'
                 }
-            
                 if (lines[a][j] == '|' && lines[i][j] == '^') splits++
             }
         }
-        println(splits)
+        
+        lines.map { it.joinToString(separator="").printIt() }
     }
 }
