@@ -63,56 +63,25 @@ object Day8 {
         
         var i = 0
         for ((p, q) in sortedPairs) {
-            if (i++ >= nConnections) break
-            val pGroup = circuits.filterValues { it.contains(p) }.keys.also { require(it.size <= 1) }.firstOrNull()
-            val qGroup = circuits.filterValues { it.contains(q) }.keys.also { require(it.size <= 1) }.firstOrNull()
+            val pGroup = circuits.filterValues { it.contains(p) }.keys.firstOrNull()
+            val qGroup = circuits.filterValues { it.contains(q) }.keys.firstOrNull()
             when {
                 pGroup == null && qGroup == null -> circuits[lastCircuit++] = mutableSetOf(p, q)
                 pGroup == null -> circuits[qGroup]!!.add(p)
                 qGroup == null -> circuits[pGroup]!!.add(q)
-                pGroup == qGroup -> continue
+                pGroup == qGroup -> Unit
                 else -> circuits[pGroup]!!.addAll(circuits.remove(qGroup)!!)
             }
-            println(circuits)
-            circuits.values.map { it.size }.printIt()
+            if (i++ > nConnections) {
+//                break
+                if (circuits.values.size == 1 && circuits.values.first().size == points.size) {
+                    println(p)
+                    println(q)
+                    println(p.x * q.x)
+                    break
+                }
+            }
         }
-        println(circuits)
-        
-        circuits.values.map { it.size }.sorted().reversed().take(3).reduce { acc, next -> acc * next }.printIt()
-        
-        
-
-        
-        
-        
-        
-//        val distances = Array(points.size) { i ->
-//            FloatArray(points.size) { j ->
-//                points[i] - points[j]
-//            }
-//        }
-//        
-//        distances.printIt("%12.3f")
-        
-//        val distances = points.flatMapIndexed { i, p ->
-//            points.associateWith { q -> p - q
-//            }
-//        }
-        
-        
-        
-        
-//        val minP: Point
-//        val minQ: Point
-//        val minD: Float
-//        for (p in points.keys) {
-//            for (q in points.keys) {
-//                if (p == q) continue
-//                val d = p - q
-//                if 
-//            }
-//        }
-//        
-        
+        circuits.values.map { it.size }.sorted().reversed().take(3).reduce { acc, next -> acc * next }.also { println("part 1: $it") }
     }
 }
