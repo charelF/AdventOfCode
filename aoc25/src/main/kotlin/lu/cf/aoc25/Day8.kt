@@ -41,10 +41,7 @@ object Day8 {
         solve(reader.actual().readLines(), 1000)
     }
 
-    private fun solve(
-        input: List<String>,
-        nConnections: Int,
-    ) {
+    private fun solve(input: List<String>, nConnections: Int) {
         val points = input.map(Point::parse)
 
         val sortedPairs =
@@ -62,7 +59,6 @@ object Day8 {
 
         var lastCircuit = 0
         var i = 0
-
         for ((p, q) in sortedPairs) {
             val pGroup = circuits.filterValues { it.contains(p) }.keys.firstOrNull()
             val qGroup = circuits.filterValues { it.contains(q) }.keys.firstOrNull()
