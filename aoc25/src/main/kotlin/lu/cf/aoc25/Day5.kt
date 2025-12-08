@@ -1,7 +1,7 @@
 package lu.cf.aoc25
 
 import lu.cf.aoc25.domain.Reader
-import lu.cf.aoc25.domain.println
+import lu.cf.aoc25.domain.printIt
 import lu.cf.aoc25.domain.toInt
 
 object Day5 {
@@ -29,7 +29,7 @@ object Day5 {
         // part 1
         ids.split("\n").map { it.toLong() }.sumOf { id ->
             bounds.any { (start, end) -> id in start..end }.toInt()
-        }.println()
+        }.printIt()
 
         println(bounds)
 
@@ -49,7 +49,7 @@ object Day5 {
 
         println(combinedBounds)
 
-        combinedBounds.sumOf { (start, end) -> (end + 1) - start }.println()
+        combinedBounds.sumOf { (start, end) -> (end + 1) - start }.printIt()
 
         // 327779637831920 too low
 
