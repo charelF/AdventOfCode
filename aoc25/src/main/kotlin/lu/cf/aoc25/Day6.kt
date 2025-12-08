@@ -25,7 +25,7 @@ object Day6 {
                 rotated[i][j] = grid[j][length - 1 - i]
             }
         }
-        
+
 //        println(rotated.toList().map { it.toList().println() })
 
         val accList = mutableListOf<MutableList<Long>>()
