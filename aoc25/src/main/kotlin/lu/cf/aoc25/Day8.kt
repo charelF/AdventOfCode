@@ -41,7 +41,10 @@ object Day8 {
         solve(reader.actual().readLines(), 1000)
     }
 
-    private fun solve(input: List<String>, nConnections: Int) {
+    private fun solve(
+        input: List<String>,
+        nConnections: Int,
+    ) {
         val points = input.map(Point::parse)
 
         val sortedPairs =
