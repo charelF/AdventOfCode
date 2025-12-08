@@ -2,7 +2,7 @@ package lu.cf.aoc25
 
 import lu.cf.aoc25.domain.Reader
 import lu.cf.aoc25.domain.Reader.Companion.toCharArray
-import lu.cf.aoc25.domain.println
+import lu.cf.aoc25.domain.printIt
 
 object Day7 {
     val reader = Reader(7)
@@ -18,6 +18,6 @@ object Day7 {
         input: Array<CharArray>,
         part: Int,
     ) {
-        input.println()
+        input.printIt()
     }
 }
