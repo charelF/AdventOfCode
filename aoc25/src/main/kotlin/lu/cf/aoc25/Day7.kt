@@ -8,16 +8,30 @@ object Day7 {
     val reader = Reader(7)
 
     fun main() {
-        // val input = reader.actual().readLines()
-        val input = reader.samples().first().toCharArray()
-        solve(input, 1)
+         val input = reader.actual().readLines()
+//        val input = reader.samples().first().readLines()
+        p1(input)
         // solve(input, 2)
     }
 
-    private fun solve(
-        input: Array<CharArray>,
-        part: Int,
-    ) {
-        input.printIt()
+    private fun p1(input: List<String>) {
+        val lines = input.map { it.toMutableList() }
+        var splits = 0
+        for (i in 1 ..< lines.size) {
+            val a = i-1
+            for (j in 1 ..< lines.first().size) {
+                when {
+                    lines[a][j] == 'S' -> lines[i][j] = '|'
+                    lines[i][j] == '^' && lines[a][j] == '|' -> {
+                        lines[i][j-1] = '|'
+                        lines[i][j+1] = '|'
+                    }
+                    lines[a][j] == '|' -> lines[i][j] = '|'
+                }
+            
+                if (lines[a][j] == '|' && lines[i][j] == '^') splits++
+            }
+        }
+        println(splits)
     }
 }
