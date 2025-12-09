@@ -20,23 +20,28 @@ object Day9 {
         override fun toString() = "(${p1.first}, ${p1.second}) - (${p2.first}, ${p2.second}) - A=$area"
     }
     
-    fun main() {
-         val points = reader.samples().first()
-//         val points = reader.samples().first()
-             .readLines().map { line ->
-            val (p1, p2) = line.split(",").map { it.trim().toInt() }
-            p1 to p2
+    fun buildBorder(points: List<Pair<Int, Int>>): MutableSet<Pair<Int, Int>> {
+        val border: MutableSet<Pair<Int, Int>> = mutableSetOf()
+        for (i in 0 .. points.size) {
+            val p1 = points[i % points.size]
+            val p2 = points[(i+1) % points.size]
+            (min(p1.first, p2.first) .. max(p1.first, p2.first)).forEach { border.add(it to p1.second) }
+            (min(p1.second, p2.second) .. max(p1.second, p2.second)).forEach { border.add(p1.first to it) }
         }
-
-        val rectangles = points.flatMap { p ->
-            points.map { q ->
-                Rectangle(p,  q)
-            }
-        }
-        rectangles.sorted().reversed().first().printIt()
+        return border
+    }
+        
+    
+    fun main() { 
+        val input = reader.samples().first().readLines()
+//         val input = reader.actual().readLines()
+        
+        val points = input.map { line -> line.split(",").map { it.trim().toInt() }.let { (x, y) -> x to y } }
+        val rectangles = points.flatMap { p -> points.map { q -> Rectangle(p,  q) } }
+        
         rectangles.sorted().reversed().first().area.printIt()
-        
-        
 
+        println("p2")
+        buildBorder(points).printIt()
     }
 }
