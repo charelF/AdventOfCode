@@ -8,6 +8,7 @@ dependencies = [
     "ipykernel>=7.1.0",
     "jupyter>=1.1.1",
     "numpy>=2.3.5",
+    "shapely>=2.1.2",
     "toposort>=1.10",
 ]
 
