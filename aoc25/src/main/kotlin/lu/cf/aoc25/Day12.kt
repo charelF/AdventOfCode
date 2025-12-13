@@ -67,5 +67,10 @@ object Day12 {
         }.toList()
         
         shapes.first().printIt()
+        // actually all of this is not needed since AOC has gone to shit
+        // and this puzzle is just a waste of my intellectual capacity. It is not a fun packing
+        // problem or optimisation problem, one just needs to check if they can fit area wise
+        // without caring about the shapes at all?
+        // This is so shit... waste of time. Solution is vibecoded in aoc25py
     }
 }
